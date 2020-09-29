@@ -3,7 +3,7 @@ import java.util.concurrent.*;
 public class Main {
     public static void main(String[] args) {
         Ats ats = new Ats();
-        Specialist specialist = new Specialist();
+        Specialist specialist = new Specialist(ats);
         ExecutorService poolSpecialists = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
         Thread atsThread = new Thread(ats);
         atsThread.start();
@@ -20,7 +20,7 @@ public class Main {
             e.printStackTrace();
         }
 
-        Ats.incomingCalls.forEach(f -> System.out.print(f.getName() + " "));
+        ats.getIncomingCalls().forEach(f -> System.out.print(f.getName() + " "));
         System.out.println();
     }
 }

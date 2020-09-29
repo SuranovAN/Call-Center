@@ -1,8 +1,12 @@
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-public class Ats implements Runnable {
+public class Ats extends Thread {
     public static boolean stop = false;
-    static volatile ConcurrentLinkedQueue<Call> incomingCalls = new ConcurrentLinkedQueue<>();
+    private volatile ConcurrentLinkedQueue<Call> incomingCalls = new ConcurrentLinkedQueue<>();
+
+    public ConcurrentLinkedQueue<Call> getIncomingCalls() {
+        return incomingCalls;
+    }
 
     @Override
     public void run() {
@@ -20,6 +24,5 @@ public class Ats implements Runnable {
                 e.printStackTrace();
             }
         }
-        Thread.currentThread().interrupt();
     }
 }
